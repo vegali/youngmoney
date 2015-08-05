@@ -18,6 +18,7 @@ router.post('/reg',function(req,res){
         req.flash('error','两次输入密码不一致，请重新输入。');
         return res.redirect('back');
     }
+    console.log('此处应判断数据库中是否有此用户，如果有返回flase,如果没有插入用户');
 });
 
 /*--------------------------------------------------------------登录*/
