@@ -30,6 +30,7 @@ router.post('/login',function(req,res){
         req.flash('error','用户名密码不能为空');
         return res.redirect('back');
     }
+    console.log('在这里去服务器判断是否匹配，然后操作')
 });
 
 module.exports = router;
