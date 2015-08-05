@@ -29,3 +29,5 @@ node_modules
 # webstrom
 .idea
 .idea/
+.idea\
+.DS_Store
