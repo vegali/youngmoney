@@ -6,7 +6,10 @@ router.get('/',function(req,res){
 });
 
 router.get('/reg',function(req,res){
-    res.render('user/reg',{title:'用户注册',action:'/user/reg'})
+res.render('user/reg',{title:'用户注册',action:'/user/reg'})
+});
+router.post('/reg',function(req,res){
+
 });
 
 router.get('/login',function(req,res){
