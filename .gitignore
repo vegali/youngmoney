@@ -27,5 +27,5 @@ build/Release
 node_modules
 
 # webstrom
-/.idea/
+.idea/*
 .DS_Store
