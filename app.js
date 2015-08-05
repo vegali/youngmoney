@@ -2,6 +2,9 @@
 var express = require('express');
 var serveStatic = require('serve-static');
 var path = require('path');
+var bodyParser = require('body-parser');
+var session = require('express-session');
+var flash = require('connect-flash');
 
 //载入路由文件
 var index = require('./routes/index');
@@ -13,6 +16,20 @@ app.set('views',path.resolve(__dirname,'views'));
 app.set('view engine','html');
 app.engine('html',require('ejs').renderFile);
 app.use(serveStatic(path.resolve(__dirname,'public')));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(session({
+    secret:'ljy',
+    resave:true,
+    saveUninitialized:true
+}));
+app.use(flash());
+app.use(function(req,res,next){
+    res.locals.user = req.session.user || '';
+    res.locals.error = req.flash('error').toString() || '';
+    res.locals.success = req.flash('success').toString() || '';
+    next();
+});
 
 
 //使用路由

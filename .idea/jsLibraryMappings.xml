@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
+    <file url="file://$PROJECT_DIR$" libraries="{youngmoney node_modules}" />
     <file url="file://$PROJECT_DIR$/app.js" libraries="{Node.js Globals, Node.js v0.10.31 Core Modules}" />
+    <file url="file://$PROJECT_DIR$/routes/index.js" libraries="{ECMAScript 6, Node.js Globals, Node.js v0.10.31 Core Modules}" />
+    <file url="file://$PROJECT_DIR$/routes/user.js" libraries="{Node.js Globals, Node.js v0.10.31 Core Modules}" />
   </component>
 </project>

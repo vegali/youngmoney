@@ -9,7 +9,10 @@ router.get('/reg',function(req,res){
 res.render('user/reg',{title:'用户注册',action:'/user/reg'})
 });
 router.post('/reg',function(req,res){
-
+    if(!req.body.username || !req.body.password){
+        req.flash('error','用户名密码不能为空。');
+        return res.redirect('back');
+    }
 });
 
 router.get('/login',function(req,res){
