@@ -5,6 +5,8 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var flash = require('connect-flash');
+var mongoStore = require('connect-mongo')(session);
+var settings = require('./settings');
 
 //载入路由文件
 var index = require('./routes/index');
@@ -19,9 +21,13 @@ app.use(serveStatic(path.resolve(__dirname,'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(session({
-    secret:'ljy',
+    secret:settings.cookieSecret,
     resave:true,
-    saveUninitialized:true
+    saveUninitialized:true,
+    key:settings.db,
+    store:new mongoStore({
+        db:settings.db
+    })
 }));
 app.use(flash());
 app.use(function(req,res,next){

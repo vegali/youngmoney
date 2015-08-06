@@ -13,6 +13,9 @@
     <%if(locals.error){%>
         <div class="alert alert-danger"><%=locals.error%></div>
     <%}%>
+    <%if(locals.success){%>
+    <div class="alert alert-success"><%=locals.success%></div>
+    <%}%>
     <form action="<%=action%>" method="post" class="form-horizontal" role="form">
         <div class="form-group">
             <label for="username" class="col-sm-2 control-label">用户名：</label>
@@ -28,9 +31,9 @@
         </div>
         <%if(action == '/user/reg'){%>
         <div class="form-group">
-            <label for="password-repeat" class="col-sm-2 control-label">确认密码：</label>
+            <label for="passwordRepeat" class="col-sm-2 control-label">确认密码：</label>
             <div class="col-sm-6">
-                <input type="password" class="form-control" id="password-repeat" name="password-repeat" placeholder="再次输入密码"/>
+                <input type="password" class="form-control" id="passwordRepeat" name="passwordRepeat" placeholder="再次输入密码"/>
             </div>
         </div>
         <%}%>

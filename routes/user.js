@@ -1,5 +1,7 @@
 var express = require('express');
+var crypto = require('crypto');
 var router = express.Router();
+var User = require('../models/user.js');
 
 router.get('/',function(req,res){
     res.send('用户首页');
@@ -18,7 +20,33 @@ router.post('/reg',function(req,res){
         req.flash('error','两次输入密码不一致，请重新输入。');
         return res.redirect('back');
     }
-    console.log('此处应判断数据库中是否有此用户，如果有返回flase,如果没有插入用户');
+    //生成口令散列值
+    var md5 = crypto.createHash('md5');
+    var password = md5.update(req.body.password).digest('base64');
+    var newUser = new User({
+        name: req.body.username,
+        password: password,
+    });
+    //检查用户名是否已经存在
+    User.get(newUser.name, function(err, user){
+        if(user){
+            err = '用户已存在!';
+        }
+        if(err){
+            req.flash('error', err);
+            return res.redirect('back');
+        }
+        //如果不存在则新增用户
+        newUser.save(function(err){
+            if(err){
+                req.flash('error',err);
+                return res.redirect('/reg');
+            }
+            req.session.user = newUser;//用户信息存入session
+            req.flash('success','注册成功!');
+            return res.redirect('back');
+        });
+    });
 });
 
 /*--------------------------------------------------------------登录*/
