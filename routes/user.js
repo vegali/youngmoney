@@ -58,7 +58,23 @@ router.post('/login',function(req,res){
         req.flash('error','用户名密码不能为空');
         return res.redirect('back');
     }
-    console.log('在这里去服务器判断是否匹配，然后操作')
+
+    var md5 = crypto.createHash('md5');
+    var password = md5.update(req.body.password).digest('base64');
+
+    User.get(req.body.username,function(err,user){
+        if(!user){
+            req.flash('error','用户名不存在');
+            return res.redirect('back');
+        }
+        if(user.password != password){
+            req.flash('error','用户名密码不匹配。');
+            return res.redirect('back');
+        }
+        req.session.user = user;
+        req.flash('success','登录成功。');
+        return res.redirect('/');
+    })
 });
 
 module.exports = router;

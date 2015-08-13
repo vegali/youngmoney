@@ -3,7 +3,7 @@ var mongodb = require('./db');
 function User(user){
     this.name = user.name;
     this.password = user.password;
-};
+}
 
 module.exports = User;
 
@@ -11,7 +11,7 @@ User.prototype.save = function(callback) {//存储用户信息
     //要存入数据库的用户文档
     var user = {
         name: this.name,
-        password: this.password,
+        password: this.password
     };
     //打开数据库
     mongodb.open(function(err, db){
@@ -46,9 +46,7 @@ User.get = function(name, callback){//读取用户信息
                 return callback(err);
             }
             //查找用户名 name 值为 name文档
-            collection.findOne({
-                name: name
-            },function(err, doc){
+            collection.findOne({name: name},function(err, doc){
                 mongodb.close();
                 if(doc){
                     var user = new User(doc);
