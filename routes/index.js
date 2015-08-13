@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/',function(req,res){
-    res.send('hello')
+    res.render('index',{title:'Ê×Ò³'})
 });
 
 module.exports = router;

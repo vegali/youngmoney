@@ -31,7 +31,6 @@ app.use(session({
 }));
 app.use(flash());
 app.use(function(req,res,next){
-    console.log(req.session.user)
     res.locals.user = req.session.user || '';
     res.locals.error = req.flash('error').toString() || '';
     res.locals.success = req.flash('success').toString() || '';

@@ -8,8 +8,9 @@
     <script src="/js/jq_171.js"></script>
 </head>
 <body>
-<h3><%=title%></h3>
 <div class="container">
+    <%-include('../inc/nav.html')%>
+    <h3><%=title%></h3>
     <%if(locals.error){%>
         <div class="alert alert-danger"><%=locals.error%></div>
     <%}%>
