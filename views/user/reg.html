@@ -11,12 +11,7 @@
 <div class="container">
     <%-include('../inc/nav.html')%>
     <h3><%=title%></h3>
-    <%if(locals.error){%>
-        <div class="alert alert-danger"><%=locals.error%></div>
-    <%}%>
-    <%if(locals.success){%>
-        <div class="alert alert-success"><%=locals.success%></div>
-    <%}%>
+    <%-include('../inc/alert.html')%>
     <form action="<%=action%>" method="post" class="form-horizontal" role="form">
         <div class="form-group">
             <label for="username" class="col-sm-2 control-label">用户名：</label>

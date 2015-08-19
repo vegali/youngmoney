@@ -7,6 +7,12 @@
     <script src="/js/jq_171.js"></script>
 </head>
 <body>
-<%=bills%>
+<%-include('inc/nav.html')%>
+<%-include('inc/alert.html')%>
+<%bills.forEach(function(bill,index){%>
+    <div>账单：<%=bill.bill%></div>
+    <div>类型：<%=bill.billtype%></div>
+    <div>时间：<%=bill.time%></div>
+<%})%>
 </body>
 </html>

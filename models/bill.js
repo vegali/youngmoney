@@ -1,8 +1,9 @@
 var mongdb = require('./db');
 
-var Bill = function(username,bill,time){
+var Bill = function(username,bill,billtype,time){
     this.user = username;
     this.bill = bill;
+    this.billtype = billtype;
     if(time){
         this.time = time;
     }else{
@@ -16,6 +17,7 @@ Bill.prototype.save = function(callback){
     var bill = {
         user:this.user,
         bill:this.bill,
+        billtype:this.billtype,
         time:this.time
     };
     mongdb.open(function(err,db){
@@ -43,7 +45,8 @@ Bill.prototype.save = function(callback){
     });
 };
 
-Bill.prototype.get = function(username,callback){
+Bill.get = function(username,callback){
+    //打开数据库
     mongdb.open(function(err,db){
         if(err){
             return callback(err);
@@ -67,10 +70,10 @@ Bill.prototype.get = function(username,callback){
                 //封装bills为Bill对象
                 var bills = [];
                 docs.forEach(function(doc,index){
-                    var bill = new Bill(doc.user,doc.bill,doc.time);
+                    var bill = new Bill(doc.user,doc.bill,doc.billtype,doc.time);
                     bills.push(bill);
                 });
-                callback(null,posts);
+                callback(null,bills);
             })
         })
     });
