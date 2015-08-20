@@ -19,11 +19,11 @@ router.get('/',function(req,res){
 
 router.post('/',function(req,res){
     if(req.body.bill == "" || req.body.billtype == ""){
-        req.flash('error','输入框不能为空。')
+        req.flash('error','输入框不能为空。');
         return res.redirect('back');
     }
     var currentUser = req.session.user;
-    var bill = new Bill(currentUser.name,req.body.bill);
+    var bill = new Bill(currentUser.name,req.body.bill,req.body.billtype);
     bill.save(function(err){
         if(err){
             req.flash('error',err);

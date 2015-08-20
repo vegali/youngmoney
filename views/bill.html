@@ -5,14 +5,38 @@
     <title><%=title%></title>
     <link rel="stylesheet" href="/css/bootstrap.css"/>
     <script src="/js/jq_171.js"></script>
+    <script src="/js/moment.js"></script>
+
 </head>
 <body>
 <%-include('inc/nav.html')%>
 <%-include('inc/alert.html')%>
-<%bills.forEach(function(bill,index){%>
-    <div>账单：<%=bill.bill%></div>
-    <div>类型：<%=bill.billtype%></div>
-    <div>时间：<%=bill.time%></div>
-<%})%>
+<div class="container">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>消费类型：</th>
+                <th>消费金额：</th>
+                <th>消费时间：</th>
+            </tr>
+            </thead>
+            <tbody>
+            <%bills.forEach(function(bill,index){%>
+            <tr>
+                <td><%=bill.billtype%></td>
+                <td><%=bill.bill%></td>
+                <td><%=bill.time%></td>
+            </tr>
+            <%})%>
+            <tr>
+                <td>合计</td>
+                <td>功能未完成</td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>

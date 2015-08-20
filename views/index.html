@@ -10,13 +10,13 @@
 <div class="container">
     <%-include('inc/nav.html')%>
     <%-include('inc/alert.html')%>
-    <%-billtypes%>
+    <!--<%-billtypes%>-->
     <form action="<%=action%>" method="post">
         <select name="billtype">
             <option>正常消费</option>
-            <%if(billtypes){%>
-                <%=billtypes%>
-            <%}%>
+            <!--<%if(billtypes){%>-->
+                <!--<%=billtypes%>-->
+            <!--<%}%>-->
         </select>
         <input type="text" name="bill" />
         <button type="submit">提交</button>

@@ -1,4 +1,5 @@
 var mongdb = require('./db');
+var moment = require('moment');
 
 var Bill = function(username,bill,billtype,time){
     this.user = username;
@@ -70,7 +71,7 @@ Bill.get = function(username,callback){
                 //封装bills为Bill对象
                 var bills = [];
                 docs.forEach(function(doc,index){
-                    var bill = new Bill(doc.user,doc.bill,doc.billtype,doc.time);
+                    var bill = new Bill(doc.user,doc.bill,doc.billtype,moment(doc.time).format("YYYY-MM"));
                     bills.push(bill);
                 });
                 callback(null,bills);

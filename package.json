@@ -17,6 +17,7 @@
     "ejs": "^2.3.3",
     "express": "^4.13.3",
     "express-session": "^1.11.3",
+    "moment": "^2.10.6",
     "mongodb": "^2.0.39",
     "serve-static": "^1.10.0"
   }
