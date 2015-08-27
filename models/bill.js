@@ -71,7 +71,7 @@ Bill.get = function(username,callback){
                 //封装bills为Bill对象
                 var bills = [];
                 docs.forEach(function(doc,index){
-                    var bill = new Bill(doc.user,doc.bill,doc.billtype,moment(doc.time).format("YYYY-MM"));
+                    var bill = new Bill(doc.user,doc.bill,doc.billtype,moment(doc.time).format("YYYY-MM-DD"));
                     bills.push(bill);
                 });
                 callback(null,bills);

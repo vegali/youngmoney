@@ -84,6 +84,15 @@ router.get('/logout',function(req,res){
     res.redirect('/');
 });
 
+/*--------------------------------------------------------------用户消费类型*/
+router.get('/bill_type',function(req,res){
+    if(!req.session.user){
+        req.flash('error','未登录。');
+        return res.redirect('/user/login');
+    }
+    res.render('user/bill_type',{title:'设置消费类型'});
+});
+
 /*--------------------------------------------------------------判断用户是否登陆*/
 function checkLogin(req,res,next){
     if(!req.session.user){

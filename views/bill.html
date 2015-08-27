@@ -12,6 +12,14 @@
 <%-include('inc/nav.html')%>
 <%-include('inc/alert.html')%>
 <div class="container">
+    <%=billType%>
+    <form action="<%=action%>" method="post">
+        <select name="billtype">
+            <option>正常消费</option>
+        </select>
+        <input type="text" name="bill" />
+        <button type="submit">记录</button>
+    </form>
     <div class="table-responsive">
         <table class="table">
             <thead>
