@@ -1,7 +1,8 @@
 var express = require('express');
 var crypto = require('crypto');
 var router = express.Router();
-var User = require('../models/user.js');
+var User = require('../models/user');
+var BillType = require('../models/bill_type');
 
 router.get('/',function(req,res){
     res.send('用户首页');
@@ -25,7 +26,7 @@ router.post('/reg',function(req,res){
     var password = md5.update(req.body.password).digest('base64');
     var newUser = new User({
         name: req.body.username,
-        password: password,
+        password: password
     });
     //检查用户名是否已经存在
     User.get(newUser.name, function(err, user){
@@ -89,8 +90,39 @@ router.get('/bill_type',function(req,res){
     if(!req.session.user){
         req.flash('error','未登录。');
         return res.redirect('/user/login');
+    }else{
+        BillType.get(req.session.user.name,function(err,billType){//获取用户消费类型
+            if(err){
+                req.flash('error',err);
+            }
+            res.render('user/bill_type',{title:'设置消费类型',billType:billType,action:'/user/bill_type'})
+        });
     }
-    res.render('user/bill_type',{title:'设置消费类型'});
+});
+
+router.post('/bill_type',function(req,res){
+    console.log(req.body.billType)
+    if(!req.body.billType){
+        req.flash('error','消费类型不能为空。');
+    }
+    var newBillType = new BillType({
+        user : req.body.username,
+        billtype : req.body.billType
+    });
+    //检查消费类型是否已经存在
+    BillType.get(newBillType.user,function(err,billType){
+        console.log(billType)
+        newBillType.save(function(err){
+            if(err){
+                req.flash('error',err);
+                return res.redirect('/user/bill_type');
+            }
+            req.flash('success','添加成功');
+            return res.redirect('/user/bill_type');
+        })
+    });
+
+
 });
 
 /*--------------------------------------------------------------判断用户是否登陆*/

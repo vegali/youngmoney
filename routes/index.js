@@ -13,7 +13,6 @@ router.get('/',function(req,res){
                     return res.redirect('/')
                 }
                 BillType.get(req.session.user.name,function(err,billType){//获取用户消费类型
-                    console.log(billType);
                     res.render('bill',{title:user.name,bills:bills,billType:billType,action:'/'})
                 });
             });

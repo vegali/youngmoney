@@ -10,6 +10,11 @@
 <div class="container">
     <%-include('../inc/nav.html')%>
     <%-include('../inc/alert.html')%>
+    <%=billType%>
+    <form action="<%=action%>" method="post">
+        <input type="text" placeholder="请输入消费类型" name="billType"/>
+        <button class="button">增加</button>
+    </form>
 </div>
 </body>
 </html>

@@ -17,14 +17,40 @@ BillType.prototype.save = function(callback){
             mongodb.close();
             return callback(err);
         }
-        collection.ensureIndex('user');
-        collection.insert(billtype,{sate:true},function(err,billtype){
-            mongodb.close();
+        db.collection('bill_type', function(err, collection){
             if(err){
+                mongdb.close();
                 return callback(err);
             }
-            return callback(err,billtype);
+            collection.ensureIndex('user');
+            collection.insert(billtype,{sate:true},function(err,billtype){
+                mongodb.close();
+                if(err){
+                    return callback(err);
+                }
+                return callback(err,billtype);
+            });
         });
+
+/*
+        //读取bill集合
+        db.collection('bills',function(err,collection){
+            if(err){
+                mongdb.close();
+                return callback(err);
+            }
+            //为user属性添加索引
+            collection.ensureIndex('user');
+            //写入bill文档
+            collection.insert(bill,{safe:true},function(err,bill){
+                mongdb.close();
+                if(err){
+                    return callback(err);
+                }
+                return callback(err,bill);
+            });
+        });
+*/
     });
 };
 
