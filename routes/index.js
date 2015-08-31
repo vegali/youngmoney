@@ -28,7 +28,7 @@ router.post('/',function(req,res){
         return res.redirect('back');
     }
     var currentUser = req.session.user;
-    var bill = new Bill(currentUser.name,req.body.bill,req.body.billtype);
+    var bill = new Bill(currentUser.name,req.body.bill,req.body.billtype,req.body.billinfo);
     bill.save(function(err){
         if(err){
             req.flash('error',err);
@@ -38,21 +38,5 @@ router.post('/',function(req,res){
         res.redirect('/');
     })
 });
-
-//router.get('/u/:user',function(req,res){
-//    User.get(req.params.user,function(err,user){
-//        if(!user){
-//            req.flash('error','用户不存在');
-//            return res.redirect('back');
-//        }
-//        Bill.get(user.name,function(err,bills){
-//            if(err){
-//                req.flash('error',err);
-//                return res.redirect('/')
-//            }
-//            res.render('bill',{title:user.name,bills:bills,action:'/'})
-//        });
-//    })
-//});
 
 module.exports = router;

@@ -95,23 +95,21 @@ router.get('/bill_type',function(req,res){
             if(err){
                 req.flash('error',err);
             }
-            res.render('user/bill_type',{title:'设置消费类型',billType:billType,action:'/user/bill_type'})
+            res.render('user/bill_type',{title:'设置消费类型',billTypes:billType,action:'/user/bill_type'})
         });
     }
 });
 
 router.post('/bill_type',function(req,res){
-    console.log(req.body.billType)
     if(!req.body.billType){
         req.flash('error','消费类型不能为空。');
     }
-    var newBillType = new BillType({
-        user : req.body.username,
-        billtype : req.body.billType
-    });
+    var newBillType = new BillType(
+        req.session.user.name,
+        req.body.billType
+    );
     //检查消费类型是否已经存在
-    BillType.get(newBillType.user,function(err,billType){
-        console.log(billType)
+    BillType.get(newBillType.user.user,function(err,billType){
         newBillType.save(function(err){
             if(err){
                 req.flash('error',err);

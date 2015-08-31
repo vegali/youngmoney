@@ -10,7 +10,13 @@
 <div class="container">
     <%-include('../inc/nav.html')%>
     <%-include('../inc/alert.html')%>
-    <%=billType%>
+    <%if(billTypes.length > 0){%>
+        <%billTypes.forEach(function(billtypes,index){%>
+            <div><%=billtypes.billtype%></div>
+        <%})%>
+    <%}else{%>
+        <div>没有自定义消费类型</div>
+    <%}%>
     <form action="<%=action%>" method="post">
         <input type="text" placeholder="请输入消费类型" name="billType"/>
         <button class="button">增加</button>

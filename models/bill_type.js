@@ -8,22 +8,22 @@ var BillType = function(username,billtype){
 module.exports = BillType;
 
 BillType.prototype.save = function(callback){
-    var billtype = {
+    var newBilltype = {
         user : this.user,
         billtype : this.billtype
     };
     mongodb.open(function(err,db){
         if(err){
-            mongodb.close();
             return callback(err);
         }
+        //读取bill_type集合
         db.collection('bill_type', function(err, collection){
             if(err){
-                mongdb.close();
+                mongodb.close();
                 return callback(err);
             }
             collection.ensureIndex('user');
-            collection.insert(billtype,{sate:true},function(err,billtype){
+            collection.insert(newBilltype,{sate:true},function(err,billtype){
                 mongodb.close();
                 if(err){
                     return callback(err);
@@ -31,26 +31,6 @@ BillType.prototype.save = function(callback){
                 return callback(err,billtype);
             });
         });
-
-/*
-        //读取bill集合
-        db.collection('bills',function(err,collection){
-            if(err){
-                mongdb.close();
-                return callback(err);
-            }
-            //为user属性添加索引
-            collection.ensureIndex('user');
-            //写入bill文档
-            collection.insert(bill,{safe:true},function(err,bill){
-                mongdb.close();
-                if(err){
-                    return callback(err);
-                }
-                return callback(err,bill);
-            });
-        });
-*/
     });
 };
 
@@ -59,7 +39,7 @@ BillType.get = function(username,callback){
         if(err){
             return callback(err);
         }
-        db.collection('billtype',function(err,collection){
+        db.collection('bill_type',function(err,collection){
             if(err){
                 mongodb.close();
                 return callback(err);
@@ -73,7 +53,7 @@ BillType.get = function(username,callback){
                 if(err){
                     callback(err);
                 }
-                var billtypes = new Array();
+                var billtypes = [];
                 docs.forEach(function(doc,index){
                     var billtype = new BillType(doc.user,doc.billtype);
                     billtypes.push(billtype)
