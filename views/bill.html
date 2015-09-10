@@ -77,8 +77,16 @@
             <%})%>
             <tr>
                 <td>合计</td>
-                <td></td>
-                <td>功能未完成</td>
+                <td>
+
+                </td>
+                <td>
+                    <%var result = 0;%>
+                    <%bills.forEach(function(bill,index){%>
+                        <%result += bill.bill-0%>
+                    <%})%>
+                    <%=result;%>
+                </td>
                 <td></td>
             </tr>
             </tbody>
