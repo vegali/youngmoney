@@ -10,17 +10,31 @@
 <div class="container">
     <%-include('../inc/nav.html')%>
     <%-include('../inc/alert.html')%>
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <div class="table-responsive">
+                <form action="<%=action%>" method="post" class="form-inline">
+                    <input type="text" placeholder="请输入消费类型" name="billType" class="form-control"/>
+                    <button type="button"  class="btn btn-primary">增加</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item active">
+            <h4 class="list-group-item-heading">
+                已有类型
+            </h4>
+        </li>
     <%if(billTypes.length > 0){%>
         <%billTypes.forEach(function(billtypes,index){%>
-            <div><%=billtypes.billtype%></div>
+        <li class="list-group-item" data-index="<%=index%>"><%=billtypes.billtype%></li>
         <%})%>
     <%}else{%>
-        <div>没有自定义消费类型</div>
+        <li class="list-group-item">没有自定义消费类型</li>
     <%}%>
-    <form action="<%=action%>" method="post">
-        <input type="text" placeholder="请输入消费类型" name="billType"/>
-        <button class="button">增加</button>
-    </form>
+    </ul>
 </div>
+<%-include('../inc/footer.html')%>
 </body>
 </html>

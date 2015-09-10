@@ -5,93 +5,106 @@
     <title><%=title%></title>
     <link rel="stylesheet" href="/css/bootstrap.css"/>
     <script src="/js/jq_171.js"></script>
-    <script src="/js/moment.js"></script>
-
 </head>
 <body>
-<%-include('inc/nav.html')%>
-<%-include('inc/alert.html')%>
 <div class="container">
-    <div class="table-responsive">
-        <form action="<%=action%>" method="post">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>花销类型</th>
-                    <th>花销说明</th>
-                    <th>花销金额</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
+    <%-include('inc/nav.html')%>
+    <%-include('inc/alert.html')%>
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <div class="table-responsive">
+                <form action="<%=action%>" method="post">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>花销类型</th>
+                            <th>花销说明</th>
+                            <th>花销金额</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <select name="billtype" class="form-control">
+                                    <option>衣</option>
+                                    <option>食</option>
+                                    <option>住</option>
+                                    <option>行</option>
+                                    <option>其它</option>
+                                    <%if(billType){%>
+                                    <%billType.forEach(function(billtype,index){%>
+                                    <option value="<%=billtype.billtype%>"><%=billtype.billtype%></option>
+                                    <%})%>
+                                    <%}%>
+                                </select>
+                                <br/>
+                                <a href="/user/bill_type">修改消费类型</a>
+                            </td>
+                            <td>
+                                <input type="text" name="billinfo" class="form-control" />
+                            </td>
+                            <td>
+                                <div class="input-group">
+                                    <div class="input-group-addon">￥</div>
+                                    <input type="text" name="bill" class="form-control" />
+                                    <div class="input-group-addon">元</div>
+                                </div>
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-primary">记录</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
                     <tr>
-                        <td>
-                            <select name="billtype">
-                                <option>衣</option>
-                                <option>食</option>
-                                <option>住</option>
-                                <option>行</option>
-                                <option>其它</option>
-                                <%if(billType){%>
-                                <%billType.forEach(function(billtype,index){%>
-                                <option value="<%=billtype.billtype%>"><%=billtype.billtype%></option>
-                                <%})%>
-                                <%}%>
-                            </select>
-                            <br/>
-                            <a href="/user/bill_type">修改消费类型</a>
-                        </td>
-                        <td>
-                            <input type="text" name="billinfo" />
-                        </td>
-                        <td>
-                            <input type="text" name="bill" />元
-                        </td>
-                        <td>
-                            <button type="submit">记录</button>
-                        </td>
+                        <th>消费类型：</th>
+                        <th>消费说明：</th>
+                        <th>消费金额：</th>
+                        <th>消费时间：</th>
                     </tr>
-                </tbody>
-            </table>
-        </form>
-    </div>
-
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-            <tr>
-                <th>消费类型：</th>
-                <th>消费说明：</th>
-                <th>消费金额：</th>
-                <th>消费时间：</th>
-            </tr>
-            </thead>
-            <tbody>
-            <%bills.forEach(function(bill,index){%>
-            <tr>
-                <td><%=bill.billtype%></td>
-                <td><%=bill.billinfo%></td>
-                <td><%=bill.bill%></td>
-                <td><%=bill.time%></td>
-            </tr>
-            <%})%>
-            <tr>
-                <td>合计</td>
-                <td>
-
-                </td>
-                <td>
-                    <%var result = 0;%>
+                    </thead>
+                    <tbody>
                     <%bills.forEach(function(bill,index){%>
-                        <%result += bill.bill-0%>
+                    <tr>
+                        <td><%=bill.billtype%></td>
+                        <td><%=bill.billinfo%></td>
+                        <td><%=bill.bill%></td>
+                        <td><%=bill.time%></td>
+                    </tr>
                     <%})%>
-                    <%=result;%>
-                </td>
-                <td></td>
-            </tr>
-            </tbody>
-        </table>
+                    <tr>
+                        <td><strong>合计</strong></td>
+                        <td>
+
+                        </td>
+                        <td>
+                            <%var result = 0;%>
+                            <%bills.forEach(function(bill,index){%>
+                            <%result += bill.bill-0%>
+                            <%})%>
+                            <strong><%=result;%></strong>
+                        </td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+
 </div>
+<%-include('inc/footer.html')%>
+<script src="/js/global.js"></script>
 </body>
 </html>

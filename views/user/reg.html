@@ -10,35 +10,49 @@
 <body>
 <div class="container">
     <%-include('../inc/nav.html')%>
-    <h3><%=title%></h3>
-    <%-include('../inc/alert.html')%>
-    <form action="<%=action%>" method="post" class="form-horizontal" role="form">
-        <div class="form-group">
-            <label for="username" class="col-sm-2 control-label">用户名：</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" id="username" name="username" placeholder="请输入用户名"/>
+    <div class="row">
+        <div class="col-xs-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <%=title%>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <%-include('../inc/alert.html')%>
+                    <form action="<%=action%>" method="post" class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="username" class="col-sm-2 control-label">用户名：</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="username" name="username" placeholder="请输入用户名"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="col-sm-2 control-label">密 码：</label>
+                            <div class="col-sm-6">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码"/>
+                            </div>
+                        </div>
+                        <%if(action == '/user/reg'){%>
+                        <div class="form-group">
+                            <label for="passwordRepeat" class="col-sm-2 control-label">确认密码：</label>
+                            <div class="col-sm-6">
+                                <input type="password" class="form-control" id="passwordRepeat" name="passwordRepeat" placeholder="再次输入密码"/>
+                            </div>
+                        </div>
+                        <%}%>
+                        <div class="form-actions">
+                            <div class="col-sm-offset-2 col-sm-6">
+                                <button class="btn btn-primary btn-lg" type="submit">提 交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label for="password" class="col-sm-2 control-label">密 码：</label>
-            <div class="col-sm-6">
-                <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码"/>
-            </div>
-        </div>
-        <%if(action == '/user/reg'){%>
-        <div class="form-group">
-            <label for="passwordRepeat" class="col-sm-2 control-label">确认密码：</label>
-            <div class="col-sm-6">
-                <input type="password" class="form-control" id="passwordRepeat" name="passwordRepeat" placeholder="再次输入密码"/>
-            </div>
-        </div>
-        <%}%>
-        <div class="form-actions">
-            <div class="col-sm-offset-2 col-sm-6">
-                <button class="btn btn-primary" type="submit">提 交</button>
-            </div>
-        </div>
-    </form>
+    </div>
 </div>
+<%-include('../inc/footer.html')%>
+<script src="/js/global.js"></script>
 </body>
 </html>

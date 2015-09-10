@@ -1,10 +1,17 @@
-<ul class="nav">
-    <li class="active"><a href="/">首页</a></li>
-    <%if(!locals.user){%>
-        <li><a href="/user/login">登录</a></li>
-        <li><a href="/user/reg">注册</a></li>
-    <%}else{%>
-        <li><a href="/user/logout">退出</a></li>
-    <%}%>
-</ul>
-<%=user.name%>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+        <a href="/" class="navbar-brand">YoungMoney</a>
+    </div>
+    <div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/">首页</a></li>
+            <%if(!locals.user){%>
+            <li><a href="/user/login">登录</a></li>
+            <li><a href="/user/reg">注册</a></li>
+            <%}else{%>
+            <li class="pull-right"><a href="/"><%=user.name%></a></li>
+            <li class="pull-right"><a href="/user/logout">退出</a></li>
+            <%}%>
+        </ul>
+    </div>
+</nav>
