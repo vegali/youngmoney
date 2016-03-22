@@ -6,6 +6,7 @@
     <title><%=title%></title>
     <link rel="stylesheet" href="/css/bootstrap.css"/>
     <script src="/js/jq_171.js"></script>
+    <script src="/js/angular.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -20,17 +21,23 @@
                 </div>
                 <div class="panel-body">
                     <%-include('../inc/alert.html')%>
-                    <form action="<%=action%>" method="post" class="form-horizontal" role="form">
+                    <form action="<%=action%>" method="post" class="form-horizontal" role="form" ng-app="myApp" ng-controller="validateCtrl" novalidate name="myForm">
                         <div class="form-group">
                             <label for="username" class="col-sm-2 control-label">用户名：</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="username" name="username" placeholder="请输入用户名"/>
+                                <input type="text" class="form-control" id="username" name="username" placeholder="请输入用户名" ng-model="username" required />
+                            </div>
+                            <div class="col-sm-4">
+                                <span ng-show="myForm.username.$error.required">请输入用户名</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="password" class="col-sm-2 control-label">密 码：</label>
                             <div class="col-sm-6">
-                                <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码"/>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码" ng-model="password" required/>
+                            </div>
+                            <div class="col-sm-4">
+                                <span ng-show="myForm.password.$error.required">请输入密码</span>
                             </div>
                         </div>
                         <%if(action == '/user/reg'){%>
@@ -54,5 +61,12 @@
 </div>
 <%-include('../inc/footer.html')%>
 <script src="/js/global.js"></script>
+<script>
+    var app = angular.module('myApp',[]);
+    app.controller('validateCtrl',function($scope){
+        $scope.username = "";
+        $scope.username = "";
+    });
+</script>
 </body>
 </html>

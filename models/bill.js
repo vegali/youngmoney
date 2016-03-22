@@ -1,11 +1,12 @@
 var mongodb = require('./db');
 var moment = require('moment');
 
-var Bill = function(username,bill,billtype,billinfo,time){
+var Bill = function(username,bill,billtype,billinfo,time,id){
     this.user = username;
     this.bill = bill;
     this.billtype = billtype;
     this.billinfo = billinfo;
+    this.id = id;
     if(time){
         this.time = time;
     }else{
@@ -73,11 +74,35 @@ Bill.get = function(username,callback){
                 //封装bills为Bill对象
                 var bills = [];
                 docs.forEach(function(doc,index){
-                    var bill = new Bill(doc.user,doc.bill,doc.billtype,doc.billinfo,moment(doc.time).format("YYYY-MM-DD"));
+                    var bill = new Bill(doc.user,doc.bill,doc.billtype,doc.billinfo,moment(doc.time).format("YYYY-MM-DD"),doc._id);
                     bills.push(bill);
                 });
                 callback(null,bills);
             })
+        })
+    });
+};
+
+Bill.prototype.dell = function(dbId,callback){
+    mongodb.open(function(err,db){
+        if(err){
+            return callback(err);
+        }
+
+        db.collection('bills',function(err,collection){
+            if(err){
+                mongodb.close();
+                return callback(err);
+            }
+
+            var query = {};
+            query.id = dbId;
+            collection.remove('bills',query,function(){
+                if(err){
+                    mongodb.close();
+                    return callback(err)
+                }
+            });
         })
     });
 };

@@ -5,6 +5,7 @@
     <title><%=title%></title>
     <link rel="stylesheet" href="/css/bootstrap.css"/>
     <script src="/js/jq_171.js"></script>
+    <script src="/js/angular.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -72,6 +73,7 @@
                         <th>消费说明：</th>
                         <th>消费金额：</th>
                         <th>消费时间：</th>
+                        <th>操作</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -81,6 +83,7 @@
                         <td><%=bill.billinfo%></td>
                         <td><%=bill.bill%></td>
                         <td><%=bill.time%></td>
+                        <td><a href="javascript:void(0)" rel="<%=bill.id%>">修改</a> / <a href="javascript:void(0)" rel="<%=bill.id%>">删除</a></td>
                     </tr>
                     <%})%>
                     <tr>
